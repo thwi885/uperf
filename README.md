@@ -4,7 +4,10 @@ Please visit [uperf.org](http://www.uperf.org) for the latest information
 
 On the slave run `./uperf -s`
 
-On the master (System under test) `./uperf -m netperf.xml` [test][#compiling-uperf]
+On the master (System under test) `./uperf -m netperf.xml` 
+
+[test][#compiling-uperf]
+
 [test][#android]
 
 To get lots of statistics, use the `-a` option. For ex
