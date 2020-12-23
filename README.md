@@ -6,9 +6,9 @@ On the slave run `./uperf -s`
 
 On the master (System under test) `./uperf -m netperf.xml` 
 
-[test][#compiling-uperf]
+[test](#compiling-uperf)
 
-[test][#android]
+[test](#android)
 
 To get lots of statistics, use the `-a` option. For ex
 
