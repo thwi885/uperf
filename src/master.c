@@ -77,7 +77,7 @@ static int
 say_goodbye(goodbye_stat_t *total, protocol_t *p, int timeout)
 {
 	goodbye_t g;
-	char msg[GOODBYE_MESSAGE_LEN];
+	char msg[GOODBYE_MESSAGE_LEN + MAXHOSTNAME + 4];
 
 	if (recv_goodbye(&g, p, timeout) != UPERF_SUCCESS) {
 		uperf_error("\nError saying goodbye with %s\n", p->host);
@@ -86,19 +86,19 @@ say_goodbye(goodbye_stat_t *total, protocol_t *p, int timeout)
 
 	switch (g.msg_type) {
 		case MESSAGE_INFO:
-			(void) snprintf(msg, GOODBYE_MESSAGE_LEN,
+			(void) snprintf(msg, sizeof(msg),
 			    "[%s] %s", p->host, g.message);
 			uperf_info(msg);
 			break;
 		case MESSAGE_NONE:
 			break;
 		case MESSAGE_ERROR:
-			(void) snprintf(msg, GOODBYE_MESSAGE_LEN,
+			(void) snprintf(msg, sizeof(msg),
 			    "[%s] %s", p->host, g.message);
 			uperf_log_msg(UPERF_LOG_ERROR, 0, msg);
 			break;
 		case MESSAGE_WARNING:
-			(void) snprintf(msg, GOODBYE_MESSAGE_LEN,
+			(void) snprintf(msg, sizeof(msg),
 			    "[%s] %s\n", p->host, g.message);
 			uperf_log_msg(UPERF_LOG_WARN, 0, msg);
 			break;
@@ -206,7 +206,7 @@ send_command_to_slaves(uperf_cmd cmd, int value)
 	for (i = 0; i < no_slaves; i++) {
 		ret = uperf_send_command(slaves[i], cmd, value);
 		if (ret <= 0) {
-			char msg[128];
+			char msg[MAXHOSTNAME + 64];
 			(void) snprintf(msg, sizeof (msg),
 			    "Could not send command %d to %s:%d ",
 			    value, slaves[i]->host, slaves[i]->port);
@@ -359,7 +359,8 @@ new_control_connection(group_t *g, char *host)
 		p = p->next;
 	}
 	/* Not found, create a new one */
-	p = create_protocol(PROTOCOL_TCP, host, options.master_port, MASTER);
+	p = create_protocol(options.control_proto, host, options.master_port,
+			    MASTER);
 	if (p != NULL) {
 		/* Try connecting */
 		if (p->connect(p, NULL) == 0) {
@@ -635,7 +636,7 @@ master(workorder_t *w)
 	}
 	/* Cleanup */
 	if (shm->global_error != 0) {
-		(void) printf("\nWARNING: Errors detected during run\n");
+		(void) printf("\nWARNING: %d Errors detected during run\n",shm->global_error);
 		shm_fini(shm);
 		exit(1);
 	}

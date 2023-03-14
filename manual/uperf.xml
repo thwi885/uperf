@@ -60,6 +60,7 @@
               <listitem>UDP</listitem>
               <listitem>SCTP</listitem>
               <listitem>SSL</listitem>
+              <listitem>VSOCK</listitem>
             </itemizedlist>
           </listitem>
 	  <listitem>Support for IPV4 and IPV6</listitem>
@@ -206,6 +207,15 @@
       </para>
     </sect2>
   </sect1>
+  <sect1><title>Architecture</title>
+      <para>
+          There are two documents that describe the Architecture of uperf.
+          <ulink url="https://github.com/uperf/uperf/blob/master/Architecture.md">Architecture.md</ulink>
+          and
+          <ulink url="https://github.com/uperf/uperf/blob/master/manual/design_notes.txt">design_notes.txt</ulink>
+          further updates to the documentation of the uperf architecture are planned.
+      </para>
+  </sect1>
   
   <sect1><title>Uperf profiles</title>
     <para>
@@ -345,7 +355,7 @@
                   </tr>
                   <tr><td class="fixed">protocol</td>
                     <td>The protocol used to connect to the remote host.
-                    Valid values are tcp, udp, ssl, and sctp</td>
+                    Valid values are tcp, udp, ssl, sctp, and vsock</td>
                   </tr>
                   <tr><td class="fixed">tcp_nodelay</td>
                     <td>Controls whether

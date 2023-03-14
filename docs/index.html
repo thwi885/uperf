@@ -80,7 +80,7 @@ On FreeBSD, Uperf is available as a binary package (pkg install uperf) and a por
   Some of the questions you could answer using uperf are
   <ul>
     <li>Bandwidth and latency (unidirectional and bi-directional)
-    with different protocols like TCP, UDP, SCTP, SSL</li>
+    with different protocols like TCP, UDP, SCTP, SSL, VSOCK</li>
     <LI>Connection setup and teardown scalability for different
     protocols</LI>
     <li>Effect of noise on ongoing network connections</li>
@@ -89,7 +89,7 @@ On FreeBSD, Uperf is available as a binary package (pkg install uperf) and a por
     <li>What is the L2 cache miss rate for connection setup?</li>
     <li>Is <tt>sendfilev(3EXT)</tt> (with one file) equivalent
     to <tt>sendfilev(3EXT)</tt>?</li>
-    <li>Understand TCP, UDP, SCTP, SSL performance under a variety of
+    <li>Understand TCP, UDP, SCTP, SSL, VSOCK performance under a variety of
     conditions</li>
     <li>Test various TCP Congestion control algorithms</li>
   </ul>
@@ -99,13 +99,13 @@ On FreeBSD, Uperf is available as a binary package (pkg install uperf) and a por
 <P>More information regarding uperf can be found at the following
 blogs
 <ul>
-  <li><a href="https://blogs.oracle.com/realneel/category/uperf">uperf - A network
+  <li><a href="https://web.archive.org/web/20110520030123/http://blogs.oracle.com/realneel/category/uperf">uperf - A network
   benchmark tool</a> - Neelakanth Nadgir</li>
-  <li><a href="http://blogs.oracle.com/eh">uperf - Theory and
+  <li><a href="https://web.archive.org/web/20131016130634/http://blogs.oracle.com/eh/">uperf - Theory and
   Examples</a> - Eric He</li>
-  <li><a href="https://blogs.oracle.com/cs/entry/comparing_ping_pong_rates_on">Comparing ping-pong rates on
+  <li><a href="https://web.archive.org/web/20131016130634/http://blogs.oracle.com/cs/entry/comparing_ping_pong_rates_on">Comparing ping-pong rates on
   Solaris and Linux using uperf</a> - Charles Suresh</li>
-  <li><a href="https://blogs.oracle.com/hotnets/entry/introducing_uperf_an_open_source">Introducing UPERF -
+  <li><a href="https://web.archive.org/web/20131016130634/http://blogs.oracle.com/hotnets/entry/introducing_uperf_an_open_source">Introducing UPERF -
   an open source network performance measurement tool</a> - Amitabha
   Banerjee</li>
 </ul>
@@ -113,25 +113,9 @@ blogs
 <P>
 <h3>Support</h3>
   For comments and discussions,
-  please join us at <a href="mailto:uperf-discuss@lists.sourceforge.net">
-  uperf-discuss@lists.sourceforge.net</a>.  If you find any bugs or have any
-  requests, please check the 
-  <a
-  href="http://sourceforge.net/tracker/?atid=1019776&group_id=211940&func=browse">bug/issue</a>
-  database before filing a new one.
+  please open a <a href="https://github.com/uperf/uperf/issues">GitHub Issue</a>
 </P>
 </div>
 <hr>
-<!-- google tracking; I do not like it; but I want to know if people
-are finding this useful. -->
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-var pageTracker = _gat._getTracker("UA-189044-3");
-pageTracker._initData();
-pageTracker._trackPageview();
-</script>
 </body>
 </html>

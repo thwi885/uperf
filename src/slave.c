@@ -359,6 +359,7 @@ slave_master(protocol_t *p)
 	uperf_log_flush();
 	/* fprintf(stderr, "%ld: master-slave exiting\n", getpid()); */
 	p->disconnect(p);
+	group_free(shm->worklist);
 	free(shm);
 
 	return (0);
@@ -423,12 +424,13 @@ slave()
 	if (setup_slave_signal() != 0) {
 		return (1);
 	}
-	slave_conn = create_protocol(PROTOCOL_TCP, "", options.master_port, SLAVE);
+	slave_conn = create_protocol(options.control_proto, "",
+				     options.master_port, SLAVE);
 	if (slave_conn == NULL) {
 		uperf_error("Cannot create control connection\n");
 		return (1);
 	}
-	if (slave_conn->listen(slave_conn, NULL) < 0) {
+	if (slave_conn->listen(slave_conn, NULL) == UPERF_FAILURE) {
 		uperf_log_flush();
 		printf("Error starting slave\n");
 		return (1);

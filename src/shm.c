@@ -29,6 +29,9 @@
 #ifdef HAVE_ATOMIC_H
 #include <atomic.h>
 #endif /* HAVE_ATOMIC_H */
+#ifdef HAVE_STDATOMIC_H
+#include <stdatomic.h>
+#endif /* HAVE_STDATOMIC_H */
 #include <sys/types.h>
 
 #ifdef HAVE_STRING_H
@@ -286,11 +289,13 @@ shm_fini(uperf_shm_t *shm)
 void
 shm_update_strand_exit(uperf_shm_t *shm)
 {
-#ifdef HAVE_ATOMIC_H
+#ifdef HAVE_STDATOMIC_H
+	(void) atomic_fetch_add(&shm->finished, 1);
+#elif defined(HAVE_ATOMIC_H)
 	atomic_add_32(&shm->finished, 1);
 #else
 	shm->finished++;
-#endif /* HAVE_ATOMIC_H */
+#endif /* HAVE_ATOMIC_H or HAVE_STDATOMIC_H */
 }
 
 void
@@ -298,7 +303,7 @@ flag_error(char *reason)
 {
 	global_shm->global_error++;
 	if (reason)
-		uperf_info("%s:%s\n", __func__, reason);
+		uperf_error("%s:global_error=%d, %s\n", __func__, global_shm->global_error, reason);
 }
 
 newstats_t *
